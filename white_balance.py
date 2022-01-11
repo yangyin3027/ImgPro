@@ -19,7 +19,7 @@ def read_wb_save(data_dir, filetype = 'tif', suffix = '_wb.tif'):
     for i, img in enumerate(imgs_wb):
       cv2.imwrite(os.path.join(data_dir, files[i].split('.')[0] + suffix), img)
 
-def imshow_wb(data_dir, filetype ='tif', suffix = '_wb.tif', n = 2, gap = 20):
+def imshow_wb(data_dir, filetype ='tif', suffix = '_wb.tif', n = 2, gap = 20, save = False):
     
     files = [f for f in os.listdir(data_dir) if f.endswith(filetype)]
     imgs_file = [f for f in files if not f.endswith(suffix)]
@@ -46,6 +46,8 @@ def imshow_wb(data_dir, filetype ='tif', suffix = '_wb.tif', n = 2, gap = 20):
     plt.figure(figsize=(10, 10))
     plt.imshow(final_img)
     plt.axis('off')
+    if save:
+      plt.save('imshow.tif', dpi = 300, bbox_inches = 'tight')
     plt.show()
 
 if __name__ == '__main__':
