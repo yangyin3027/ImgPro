@@ -7,3 +7,6 @@ Perform white balance on a folder of images and plot them to see the change
 > - 2. read_wb_save function to read files from image folders and apply the white-balance function to the batched files
 > - 3. the processed images are saved in the same image folder with a customized suffix
 > - 4. imshow function is defined to help visualize the images before and after the white balance
+## Note
+> - 1. defaulted image file type is 'tif', but a customized filetype could be given by the sysarg
+> - 2. when customized file type provided, please change the defaulted suffix as well to make the imshow in parallel works
