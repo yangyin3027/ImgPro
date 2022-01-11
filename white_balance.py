@@ -12,16 +12,16 @@ def white_balance(img, perc = 0.05):
         new_chann.append(channel)
     return np.dstack(new_chann)
 
-def read_wb_save(data_dir, suffix = '_wb.tif'):
-    files = [f for f in os.listdir(data_dir) if f.endswith('tif')]
+def read_wb_save(data_dir, filetype = 'tif', suffix = '_wb.tif'):
+    files = [f for f in os.listdir(data_dir) if f.endswith(filetype)]
     imgs = [cv2.imread(os.path.join(data_dir, file), 1) for file in files]
     imgs_wb = [white_balance(img) for img in imgs]
     for i, img in enumerate(imgs_wb):
       cv2.imwrite(os.path.join(data_dir, files[i].split('.')[0] + suffix), img)
 
-def imshow_wb(data_dir, n = 2, suffix = '_wb.tif', gap = 20):
+def imshow_wb(data_dir, filetype ='tif', suffix = '_wb.tif', n = 2, gap = 20):
     
-    files = [f for f in os.listdir(data_dir) if f.endswith('.tif')]
+    files = [f for f in os.listdir(data_dir) if f.endswith(filetype)]
     imgs_file = [f for f in files if not f.endswith(suffix)]
     imgs_file.sort()
     imgs_wb_file = [f for f in files if f.endswith(suffix)]
@@ -48,9 +48,28 @@ def imshow_wb(data_dir, n = 2, suffix = '_wb.tif', gap = 20):
     plt.axis('off')
     plt.show()
 
-if __name__ = '__main__':
-    read_wb_save(data_dir)
-    imshow_wb(data_dir)
+if __name__ == '__main__':
+
+    import sys
+
+    n = len(sys.argv)
+
+    if n <=1:
+      print('Please specify image folder to work with')
+    
+    if n == 2:
+      read_wb_save(sys.argv[1])
+      imshow_wb(sys.argv[1])
+      print("You could also specify the image type other than tif")
+    
+    if n == 3:
+      print("Please also specify the default suffix after wb, such as '_wb.tif'")
+    
+    if n == 4:
+
+      read_wb_save(sys.argv[1], filetype = sys.argv[2], suffix = sys.argv[3])
+      imshow_wb(sys.argv[1], filetype = sys.argv[2], suffix = sys.argv[3])
+    
 
     
     
