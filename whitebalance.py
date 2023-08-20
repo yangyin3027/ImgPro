@@ -1,5 +1,4 @@
 import numpy as np
-import cv2
 import skimage
 from PIL import Image
 from skimage.util import img_as_float
@@ -80,7 +79,7 @@ def main(file, method='patch', patch=None,
     logger.setLevel(logging.DEBUG)
     formatter = logging.Formatter('%(asctime)s | %(name)s -> %(message)s')
     sh.setFormatter(formatter)
-
+    
     if os.path.isdir(file):
         files = [os.path.join(file, f)
                  for f in os.listdir(file)
